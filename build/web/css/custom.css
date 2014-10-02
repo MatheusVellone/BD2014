@@ -1,0 +1,15 @@
+body{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+img {
+    vertical-align: baseline !important;
+}
+.comentario{
+    height: 30px;
+}
+.foto-comentario{
+    height: 30px;
+}
