@@ -14,27 +14,27 @@ import outros.Outros;
 
 public class PostDAO extends DAO<Post> {
 
-    private static final String createQuery = "INSERT INTO post(id_autor, titulo, conteudo) VALUES(?, ?, ?);";
+    private static final String createQuery = "INSERT INTO post(id_autor, titulo, conteudo, created, modified) VALUES(?, ?, ?, 'now', 'now');";
     private static final String readQuery = "SELECT * FROM post WHERE id = ?;";
     private static final String autorQuery = "SELECT * FROM post WHERE id_autor = ?;";
-    private static final String updateQuery = "UPDATE post SET titulo = ?, conteudo = ? WHERE id = ?;";
+    private static final String updateQuery = "UPDATE post SET titulo = ?, conteudo = ?, modified = 'now' WHERE id = ?;";
     private static final String deleteQuery = "DELETE FROM post WHERE id = ?;";
     private static final String allQuery = "SELECT * FROM post;";
     private static final String allTemaQuery = "SELECT * FROM post WHERE LOWER(conteudo) LIKE LOWER(?);";
     private static final String addTemaQuery = "INSERT INTO tema_post(post_id, tema) VALUES (?, ?);";
     private static final String postFollowQuery = "SELECT * FROM post p INNER JOIN seguidores s ON p.id_autor = s.id_segue WHERE s.id_seguidor = ? ORDER BY p.id DESC;";
     private static final String searchQuery = "SELECT * FROM post WHERE LOWER(titulo) LIKE LOWER(?) OR LOWER(conteudo) LIKE LOWER(?);";
-    private static final String repostQuery = "INSERT INTO post(id_autor, republicacao, id_repub) VALUES(?, true, ?);";
+    private static final String repostQuery = "INSERT INTO post(id_autor, republicacao, id_repub, created, modified) VALUES(?, true, ?, 'now', 'now');";
 
     private static final String likeCount = "SELECT COUNT(*) AS contador FROM likes WHERE post_id = ? AND like_sit = 1;";
     private static final String dislikeCount = "SELECT COUNT(*) AS contador FROM likes WHERE post_id = ? AND like_sit = -1;";
     private static final String situacaoLike = "SELECT like_sit AS contador FROM likes WHERE usuario_id = ? AND post_id = ?;";
 
-    private static final String colocaLike = "INSERT INTO likes(usuario_id, post_id, like_sit) VALUES(?, ?, 1);";
-    private static final String colocaDisLike = "INSERT INTO likes(usuario_id, post_id, like_sit) VALUES(?, ?, -1);";
+    private static final String colocaLike = "INSERT INTO likes(usuario_id, post_id, like_sit, created) VALUES(?, ?, 1, 'now');";
+    private static final String colocaDisLike = "INSERT INTO likes(usuario_id, post_id, like_sit, created) VALUES(?, ?, -1, 'now');";
     private static final String tiraLike = "DELETE FROM likes WHERE usuario_id = ? AND post_id = ?;";
 
-    private static final String comentar = "INSERT INTO comentarios(id_post, comentario, dono) VALUES(?, ?, ?)";
+    private static final String comentar = "INSERT INTO comentarios(id_post, comentario, dono, created, modified) VALUES(?, ?, ?, 'now', 'now')";
     private static final String comentarios = "SELECT * FROM comentarios WHERE id_post = ?";
 
     public PostDAO(Connection connection) {

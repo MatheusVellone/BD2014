@@ -11,14 +11,14 @@ import model.Grupo;
 
 public class GrupoDAO extends DAO<Grupo> {
 
-    private static final String createQuery = "INSERT INTO grupo(id_admin, nome) VALUES(?, ?);";
-    private static final String updateQuery = "UPDATE grupo SET nome = ? WHERE id = ?;";
+    private static final String createQuery = "INSERT INTO grupo(id_admin, nome, created, modified) VALUES(?, ?, 'now', 'now');";
+    private static final String updateQuery = "UPDATE grupo SET nome = ?, modified = 'now' WHERE id = ?;";
     private static final String readQuery = "SELECT * FROM grupo WHERE id = ?;";
     private static final String deleteQuery = "DELETE FROM grupo WHERE id = ?;";
     private static final String allQuery = "SELECT * FROM grupo;";
     private static final String allQueryAdmin = "SELECT * FROM grupo WHERE id_admin = ?;";
     private static final String allQueryIntegrante = "SELECT * FROM integrantes_grupo WHERE id_usuario = ?;";
-    private static final String novoIntegranteQuery = "INSERT INTO integrantes_grupo(id_grupo, id_usuario) VALUES(?, ?)";
+    private static final String novoIntegranteQuery = "INSERT INTO integrantes_grupo(id_grupo, id_usuario, created) VALUES(?, ?, 'now')";
     private static final String SairGrupoQuery = "DELETE FROM integrantes_grupo WHERE id_usuario = ? AND id_grupo = ?";
     private static final String searchQuery = "SELECT * FROM grupo WHERE LOWER(nome) LIKE LOWER(?)";
 

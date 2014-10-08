@@ -13,14 +13,14 @@ import model.Usuario;
 
 public class UsuarioDAO extends DAO<Usuario> {
 
-    private static final String createQuery = "INSERT INTO usuario(login, senha, nome, nascimento, descricao, foto) VALUES(?, md5(?), ?, ?, ?, ?);";
+    private static final String createQuery = "INSERT INTO usuario(login, senha, nome, nascimento, descricao, foto, created, modified) VALUES(?, md5(?), ?, ?, ?, ?, 'now', 'now');";
     private static final String readQuery = "SELECT * FROM usuario WHERE id = ?;";
-    private static final String updateQuery = "UPDATE usuario SET login = ?, nome = ?, nascimento = ?, descricao = ?, foto = ? WHERE id = ?;";
-    private static final String updateWithPasswordQuery = "UPDATE usuario SET login = ?, nome = ?, nascimento = ?, descricao = ?, foto = ?, senha = md5(?) WHERE id = ?;";
+    private static final String updateQuery = "UPDATE usuario SET login = ?, nome = ?, nascimento = ?, descricao = ?, foto = ?, modified = 'now' WHERE id = ?;";
+    private static final String updateWithPasswordQuery = "UPDATE usuario SET login = ?, nome = ?, nascimento = ?, descricao = ?, foto = ?, senha = md5(?), modified='now' WHERE id = ?;";
     private static final String deleteQuery = "DELETE FROM usuario WHERE id = ?;";
     private static final String allQuery = "SELECT * FROM usuario;";
     private static final String authenticateQuery = "SELECT id, senha, nome, nascimento, descricao, foto FROM usuario WHERE login = ?;";
-    private static final String seguirQuery = "INSERT INTO seguidores(id_seguidor, id_segue) VALUES(?, ?)";
+    private static final String seguirQuery = "INSERT INTO seguidores(id_seguidor, id_segue, created) VALUES(?, ?, 'now')";
     private static final String quemEuSigoQuery = "SELECT * FROM seguidores s INNER JOIN usuario u ON s.id_segue = u.id WHERE id_seguidor = ?";
     private static final String quemMeSegue = "SELECT * FROM seguidores s INNER JOIN usuario u ON s.id_seguidor = u.id WHERE id_segue = ?";
     private static final String paraDeSeguirQuery = "DELETE FROM seguidores WHERE id_seguidor = ? AND id_segue = ?";

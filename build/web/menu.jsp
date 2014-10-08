@@ -53,10 +53,13 @@
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                     <li role="presentation"><a href="${pageContext.servletContext.contextPath}/post/create">Nova postagem</a></li>
                     <li role="presentation"><a href="${pageContext.servletContext.contextPath}/post/meus">Meus Posts</a></li>
-                    <!--<li role="presentation"><a href="${pageContext.servletContext.contextPath}/post">Ver todos posts</a></li>-->
                 </ul>
             </div>
-
+                
+            <div class="btn-group">
+                <a href="${pageContext.servletContext.contextPath}/relatorio" class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-th-list"></span> Relatórios</a>
+            </div>
+            
             <div class="btn-group">
                 <a href="${pageContext.servletContext.contextPath}/logout" class="btn btn-danger navbar-btn"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
             </div>
