@@ -1,10 +1,22 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Grupo {
 
     private int id;
     private int id_admin;
     private String nome;
+    private int servidor;
+    private Timestamp data;
+
+    public int getServidor() {
+        return servidor;
+    }
+
+    public void setServidor(int servidor) {
+        this.servidor = servidor;
+    }
 
     public int getId() {
         return id;
@@ -30,6 +42,12 @@ public class Grupo {
         this.nome = nome;
     }
 
-  
-    
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
+
 }

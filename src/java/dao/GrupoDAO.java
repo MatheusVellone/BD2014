@@ -5,13 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import model.Grupo;
 
 public class GrupoDAO extends DAO<Grupo> {
 
-    private static final String createQuery = "INSERT INTO grupo(id_admin, nome, created, modified) VALUES(?, ?, 'now', 'now');";
+    private static final String createQuery = "INSERT INTO grupo(id_admin, nome, created, modified, servidor) VALUES(?, ?, ?, ?, ?);";
     private static final String updateQuery = "UPDATE grupo SET nome = ?, modified = 'now' WHERE id = ?;";
     private static final String readQuery = "SELECT * FROM grupo WHERE id = ?;";
     private static final String deleteQuery = "DELETE FROM grupo WHERE id = ?;";
@@ -31,7 +32,16 @@ public class GrupoDAO extends DAO<Grupo> {
         try (PreparedStatement statement = connection.prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS);) {
             statement.setInt(1, grupo.getId_admin());
             statement.setString(2, grupo.getNome());
-
+            if (grupo.getData() == null) {
+                java.util.Date utilDate = new java.util.Date();
+                Timestamp sqlDate = new Timestamp(utilDate.getTime());
+                statement.setTimestamp(4, sqlDate);
+                statement.setTimestamp(5, sqlDate);
+            } else {
+                statement.setTimestamp(4, grupo.getData());
+                statement.setTimestamp(5, grupo.getData());
+            }
+            statement.setInt(6, grupo.getServidor());
             statement.executeUpdate();
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()) {
@@ -85,7 +95,7 @@ public class GrupoDAO extends DAO<Grupo> {
             }
         }
     }
-    
+
     public void sairDoGrupo(Integer id_usuario, Integer id_grupo) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(SairGrupoQuery);) {
             statement.setInt(1, id_usuario);
@@ -117,7 +127,7 @@ public class GrupoDAO extends DAO<Grupo> {
 
         return grupoList;
     }
-    
+
     public List<Grupo> allAdmin(Integer id) throws SQLException {
         List<Grupo> grupoList = new ArrayList<>();
 
@@ -138,7 +148,7 @@ public class GrupoDAO extends DAO<Grupo> {
 
         return grupoList;
     }
-    
+
     public List<Grupo> allIntegrante(Integer id) throws SQLException {
         List<Grupo> grupoList = new ArrayList<>();
 
@@ -167,15 +177,15 @@ public class GrupoDAO extends DAO<Grupo> {
             }
         }
     }
-    
+
     public List<Grupo> search(String termo_pesquisa) throws SQLException {
         List<Grupo> grupoList = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(searchQuery)) {
-            statement.setString(1, "%"+termo_pesquisa+"%");
+            statement.setString(1, "%" + termo_pesquisa + "%");
             ResultSet result = statement.executeQuery();
-            
-            while(result.next()){
+
+            while (result.next()) {
                 Grupo grupo = new Grupo();
                 grupo.setId(result.getInt("id"));
                 grupo.setId_admin(result.getInt("id_admin"));

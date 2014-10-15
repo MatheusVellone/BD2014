@@ -1,10 +1,31 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Comentario {
+
     private int id_post;
     private int id;
     private int dono;
     private String comentario;
+    private Timestamp data;
+    private int servidor;
+
+    public int getServidor() {
+        return servidor;
+    }
+
+    public void setServidor(int servidor) {
+        this.servidor = servidor;
+    }
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
 
     public int getId() {
         return id;

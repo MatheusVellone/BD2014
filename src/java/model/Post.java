@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Timestamp;
+
 public class Post {
 
     private Integer id;
@@ -8,6 +10,24 @@ public class Post {
     private String conteudo;
     private boolean republicacao;
     private int id_repub;
+    private Timestamp data;
+    private int servidor;
+
+    public int getServidor() {
+        return servidor;
+    }
+
+    public void setServidor(int servidor) {
+        this.servidor = servidor;
+    }
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
 
     public Integer getId() {
         return id;

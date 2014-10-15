@@ -52,6 +52,10 @@ public class DAOFactory implements AutoCloseable {
     public GrupoDAO getGrupoDAO() {
         return new GrupoDAO(connection);
     }
+    
+    public RelatorioDAO getRelatorioDAO() {
+        return new RelatorioDAO(connection);
+    }
 
     @Override
     public void close() throws SQLException {

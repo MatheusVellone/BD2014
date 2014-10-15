@@ -1,26 +1,15 @@
 package outros;
 
-import dao.DAO;
-import dao.DAOFactory;
-import dao.PostDAO;
-import dao.UsuarioDAO;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import model.Comentario;
-import model.Like;
-import model.Post;
-import model.Usuario;
 
 @WebServlet(
         urlPatterns = {
@@ -37,9 +26,6 @@ public class Outros extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DAO dao;
-        Post post = new Post();
-
         switch (request.getServletPath()) {
             case "/file/upload":
                 Part part = request.getPart("file");

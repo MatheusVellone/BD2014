@@ -12,7 +12,7 @@
         <%@include file="/menu.jsp" %>
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/perfil.js"></script>
         <script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/like.js"></script>
-<script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/comentario.js"></script>
+        <script type="text/javascript" src="${pageContext.servletContext.contextPath}/js/comentario.js"></script>
         <div class="well">
             <div class="row">
                 <div class="col-md-3">
@@ -38,10 +38,12 @@
                     </div>
                     <div id="info_segue" style="display: none">
                         <c:forEach var="pSegue" items="${pessoasEuSigo}">
-                            <p><a href="${pageContext.servletContext.contextPath}/usuario/perfil?id=${pSegue.id}">
+                            <p>
+                                <a href="${pageContext.servletContext.contextPath}/usuario/perfil?id=${pSegue.id}">
                                     <c:out value="${pSegue.nome}"/>
-                                </a></p>
-                            </c:forEach>
+                                </a>
+                            </p>
+                        </c:forEach>
                     </div>
                 </div>
                 <div class="col-md-2">

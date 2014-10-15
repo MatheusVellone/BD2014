@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Usuario {
 
@@ -10,6 +11,26 @@ public class Usuario {
     private String nome;
     private String descricao;
     private String foto;
+    private Timestamp data;
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
+    
+    private int servidor;
+
+    public int getServidor() {
+        return servidor;
+    }
+
+    public void setServidor(int servidor) {
+        this.servidor = servidor;
+    }
+    
 
     public String getDescricao() {
         return descricao;
